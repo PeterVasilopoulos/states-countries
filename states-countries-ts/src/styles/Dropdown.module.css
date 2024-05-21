@@ -1,0 +1,10 @@
+.menu {
+    padding: 3px;
+    background-color: rgb(35, 65, 104);
+    color: white;
+    font-weight: bold;
+}
+
+.menuItem {
+    font-weight: bold;
+}
