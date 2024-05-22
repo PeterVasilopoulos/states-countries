@@ -4,7 +4,7 @@ import Dropdown from "./Dropdown";
 
 interface StatesProps {
     selectedState: ListItem;
-    setSelectedState: any;
+    setSelectedState: (stateObject: ListItem) => void;
     selectedCountry: ListItem;
 }
 
@@ -14,12 +14,12 @@ function States({
     selectedCountry, 
 }: StatesProps) {
     // variable to hold list of states
-    const [statesList, setStatesList] = useState([])
+    const [statesList, setStatesList] = useState([] as ListItem[])
 
     // function to find and select state
     function findAndSetSelectedState(stateId: number) {
         const state = statesList.find(s => s.id === stateId)
-        setSelectedState(state)
+        setSelectedState(state as ListItem)
     }
 
     // hook to pull state data from api
@@ -34,13 +34,12 @@ function States({
             .then(data => {
             if(isMounted) {
                 setStatesList(data)
-                console.log(data)
             }
             })
         }
 
         // run function if a country is selected
-        if(selectedCountry) {
+        if(selectedCountry.id) {
             fetchData()
         }
 
@@ -52,7 +51,7 @@ function States({
 
     return (
         <div>
-            {selectedCountry ?
+            {selectedCountry.id ?
                 <>
                     <p>State Selected: {selectedState.name}</p>
                     <Dropdown 

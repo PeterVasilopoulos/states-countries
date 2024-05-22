@@ -6,7 +6,7 @@ import styles from '../styles/Countries.module.css';
 
 interface CountriesProps {
     selectedCountry: ListItem;
-    setSelectedCountry: any;
+    setSelectedCountry: (countryObject: ListItem) => void;
 }
 
 function Countries({
@@ -19,8 +19,7 @@ function Countries({
     // function to find and select country
     function findAndSetSelectedCountry(countryId: number) {
         const country = countriesList.find(c => c.id === countryId);
-        console.log(countryId);
-        setSelectedCountry(country);
+        setSelectedCountry(country as ListItem);
     }
 
 
@@ -37,7 +36,6 @@ function Countries({
             {
                 if(isMounted) {
                 setCountriesList(data)}
-                console.log(data)
             }
             )
         }
