@@ -8,8 +8,6 @@ interface DropdownProps {
 }
 
 function Dropdown({selected, setSelected, list}: DropdownProps) {
-    
-
     return (
         <select 
             className={styles.menu}

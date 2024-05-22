@@ -22,7 +22,6 @@ function Countries({
         setSelectedCountry(country as ListItem);
     }
 
-
     // hook to pull country data from api
     useEffect(() => {
         // variable to check if component is mounted
