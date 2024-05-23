@@ -1,5 +1,5 @@
 .clickbox {
-    --word-bg-color: rgb(71, 43, 20);
+    --word-bg-color: rgb(65, 93, 67);
     cursor: pointer;
     padding: 0 5px;
     border-radius: 5px;
@@ -8,7 +8,7 @@
 }
 
 .clickbox:hover {
-    background-color: rgb(124, 93, 67);
+    background-color: rgb(99, 128, 101);
     border: 1px solid white;
 }
 

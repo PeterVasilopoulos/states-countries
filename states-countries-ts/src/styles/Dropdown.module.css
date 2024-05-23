@@ -1,11 +1,15 @@
 .menu {
     padding: 3px;
-    background-color: rgb(38,8,7);
-    color: white;
+    background-color: white;
+    color: black;
     font-weight: bold;
-    border: 1px solid white;
+    border: 1px solid black;
 }
 
 .menuItem {
     font-weight: bold;
+}
+
+option {
+    color: black;
 }
