@@ -1,8 +1,9 @@
 .menu {
     padding: 3px;
-    background-color: rgb(35, 65, 104);
+    background-color: rgb(38,8,7);
     color: white;
     font-weight: bold;
+    border: 1px solid white;
 }
 
 .menuItem {

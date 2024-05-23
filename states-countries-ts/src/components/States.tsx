@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import type { ListItem } from "../types/ListItem";
 import Dropdown from "./Dropdown";
+import styles from '../styles/States.module.css'
 
 interface StatesProps {
     selectedState: ListItem;
@@ -50,10 +51,10 @@ function States({
     }, [selectedCountry])
 
     return (
-        <div>
+        <div className={styles.main}>
             {selectedCountry.id ?
                 <>
-                    <p>State Selected: {selectedState.name}</p>
+                    <p className={styles.label}>State Selected: {selectedState.name}</p>
                     <Dropdown 
                         selected={selectedState}
                         setSelected={findAndSetSelectedState}

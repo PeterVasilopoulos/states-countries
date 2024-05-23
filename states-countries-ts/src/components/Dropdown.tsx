@@ -15,7 +15,7 @@ function Dropdown({selected, setSelected, list}: DropdownProps) {
             defaultValue={""}
             onChange={e => setSelected(parseInt(e.target.value))}
         >
-            <option value="" disabled >Select an Item</option>
+            <option value="" disabled>Select an Item...</option>
 
             {/* map through list */}
             {list.map((item: ListItem) => {

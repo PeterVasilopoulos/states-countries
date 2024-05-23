@@ -5,6 +5,7 @@ import Countries from './components/Countries';
 import States from './components/States';
 import styles from './styles/App.module.css';
 import './styles/index.css';
+import ClickBox from './components/ClickBox';
 
 function App() {
   // variable to hold the selected country
@@ -13,20 +14,51 @@ function App() {
   // variable to hold the selected state
   const [selectedState, setSelectedState] = useState({} as ListItem)
 
+  // variable to decide which item is added
+  const [itemToAdd, setItemToAdd] = useState('Country')
+
   return (
-    <div className={styles.main}>
-      <Countries 
-        selectedCountry={selectedCountry}
-        setSelectedCountry={setSelectedCountry}
-      />
-      <States 
-        selectedState={selectedState}
-        setSelectedState={setSelectedState}
-        selectedCountry={selectedCountry}
-      />
+    <>
+      {/* Select Country and State Box */}
+      <div className={styles.box}>
+        {/* Title */}
+        <h1 className={styles.title}>Countries and States</h1>
+
+        <div className={styles.content}>
+          <Countries 
+            selectedCountry={selectedCountry}
+            setSelectedCountry={setSelectedCountry}
+            setSelectedState={setSelectedState}
+          />
+          <States 
+            selectedState={selectedState}
+            setSelectedState={setSelectedState}
+            selectedCountry={selectedCountry}
+          />
+        </div>
+      </div>
 
 
-    </div>
+      {/* Add Country or State Box */}
+      <div className={styles.box}>
+        {/* Title */}
+        <h1 className={styles.title}>
+          Add a
+          {/* State ClickBox */}
+          &nbsp;<ClickBox 
+            setter={setItemToAdd}
+          >Country</ClickBox>
+
+          {/* Country ClickBox */}
+          &nbsp;<ClickBox 
+            setter={setItemToAdd}
+          >State</ClickBox>
+        </h1>
+        <div className={styles.content}>
+          {itemToAdd}
+        </div>
+      </div>
+    </>
   )
 }
 
