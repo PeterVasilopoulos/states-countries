@@ -46,11 +46,13 @@ function App() {
           Add a
           {/* State ClickBox */}
           &nbsp;<ClickBox 
+            checker={itemToAdd}
             setter={setItemToAdd}
           >Country</ClickBox>
 
           {/* Country ClickBox */}
           &nbsp;<ClickBox 
+            checker={itemToAdd}
             setter={setItemToAdd}
           >State</ClickBox>
         </h1>

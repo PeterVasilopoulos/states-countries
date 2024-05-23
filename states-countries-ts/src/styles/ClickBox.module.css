@@ -1,0 +1,21 @@
+.clickbox {
+    --word-bg-color: rgb(71, 43, 20);
+    cursor: pointer;
+    padding: 0 5px;
+    border-radius: 5px;
+    background-color: var(--word-bg-color);
+    border: 1px solid var(--word-bg-color);
+}
+
+.clickbox:hover {
+    background-color: rgb(124, 93, 67);
+    border: 1px solid white;
+}
+
+.active {
+    color: white;
+}
+
+.inactive {
+    color: rgb(156, 156, 156);
+}
