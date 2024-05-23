@@ -6,6 +6,8 @@ import States from './components/States';
 import styles from './styles/App.module.css';
 import './styles/index.css';
 import ClickBox from './components/ClickBox';
+import CountryForm from './components/CountryForm';
+import StateForm from './components/StateForm';
 
 function App() {
   // variable to hold the selected country
@@ -16,6 +18,9 @@ function App() {
 
   // variable to decide which item is added
   const [itemToAdd, setItemToAdd] = useState('Country')
+
+  // list of countries
+  const [countriesList, setCountriesList] = useState([] as ListItem[])
 
   return (
     <>
@@ -29,6 +34,8 @@ function App() {
             selectedCountry={selectedCountry}
             setSelectedCountry={setSelectedCountry}
             setSelectedState={setSelectedState}
+            countriesList={countriesList}
+            setCountriesList={setCountriesList}
           />
           <States 
             selectedState={selectedState}
@@ -56,8 +63,22 @@ function App() {
             setter={setItemToAdd}
           >State</ClickBox>
         </h1>
+
+        {/* Forms */}
         <div className={styles.content}>
-          {itemToAdd}
+          {
+            itemToAdd === 'Country' ? 
+            <CountryForm />
+            :
+            <></>
+          }
+
+          {
+            itemToAdd === 'State' ?
+            <StateForm countriesList={countriesList}/>
+            :
+            <></>
+          }
         </div>
       </div>
     </>

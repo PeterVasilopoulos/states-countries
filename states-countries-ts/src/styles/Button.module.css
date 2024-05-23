@@ -1,0 +1,14 @@
+.button {
+    color: black;
+    padding: 2px 6px;
+    font-weight: bold;
+    background-color: white;
+    box-shadow: 2px 2px black;
+    cursor: pointer;
+}
+
+.button:active {
+    transform: translate(2px, 2px);
+    background-color: rgb(219, 219, 219);
+    box-shadow: none;
+}

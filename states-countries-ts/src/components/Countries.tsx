@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Dropdown from "./Dropdown";
 import type { ListItem } from "../types/ListItem";
 
@@ -8,16 +8,17 @@ interface CountriesProps {
     selectedCountry: ListItem;
     setSelectedCountry: (countryObject: ListItem) => void;
     setSelectedState: (stateObject: ListItem) => void;
+    countriesList: ListItem[];
+    setCountriesList: (countries: ListItem[]) => void;
 }
 
 function Countries({
-    selectedCountry, 
+    selectedCountry,
     setSelectedCountry,
-    setSelectedState
+    setSelectedState,
+    countriesList,
+    setCountriesList
 }: CountriesProps) {
-    // variable to hold list of countries
-    const [countriesList, setCountriesList] = useState([] as ListItem[])
-
     // function to find and select country
     function findAndSetSelectedCountry(countryId: number) {
         const country = countriesList.find(c => c.id === countryId);
