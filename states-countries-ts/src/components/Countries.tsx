@@ -36,10 +36,13 @@ function Countries({
         async function fetchData() {
         await fetch("https://xc-countries-api.fly.dev/api/countries/")
             .then(response => response.json())
-            .then(data => 
-            {
+            .then(data => {
                 if(isMounted) {
-                setCountriesList(data)}
+                    // place sorted list into state
+                    setCountriesList(data.sort((a: ListItem, b: ListItem) => 
+                        a.name.localeCompare(b.name)
+                    ))
+                }
             }
             )
         }

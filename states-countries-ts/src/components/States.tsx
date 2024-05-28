@@ -33,9 +33,12 @@ function States({
         await fetch(`https://xc-countries-api.fly.dev/api/countries/${selectedCountry.code}/states/`)
             .then(response => response.json())
             .then(data => {
-            if(isMounted) {
-                setStatesList(data)
-            }
+                if(isMounted) {
+                    // place sorted list into state
+                    setStatesList(data.sort((a: ListItem, b: ListItem) => 
+                        a.name.localeCompare(b.name)
+                    ))
+                }
             })
         }
 
