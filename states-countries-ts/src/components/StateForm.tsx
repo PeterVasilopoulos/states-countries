@@ -4,8 +4,6 @@ import styles from '../styles/Form.module.css';
 import Button from "./Button";
 
 interface StateFormProps {
-    reloadVar: boolean;
-    setReloadVar: (bool: boolean) => void;
     countriesList: ListItem[];
 }
 
@@ -18,7 +16,7 @@ interface StateFormData {
 // post url
 const POST_URL = "https://xc-countries-api.fly.dev/api/states/"
 
-function StateForm({reloadVar, setReloadVar, countriesList}: StateFormProps) {
+function StateForm({countriesList}: StateFormProps) {
     // variable to hold form data
     const [formData, setFormData] = useState({name: '', code: '', countryId: -1})
 
@@ -49,9 +47,6 @@ function StateForm({reloadVar, setReloadVar, countriesList}: StateFormProps) {
                 },
                 body: JSON.stringify(data)
             })
-
-            // flip reloadVar
-            setReloadVar(!reloadVar)
 
             return response.json();
         }

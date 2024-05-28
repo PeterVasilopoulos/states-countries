@@ -7,14 +7,12 @@ interface StatesProps {
     selectedState: ListItem;
     setSelectedState: (stateObject: ListItem) => void;
     selectedCountry: ListItem;
-    reloadVar: boolean;
 }
 
 function States({
     selectedState, 
     setSelectedState, 
     selectedCountry,
-    reloadVar
 }: StatesProps) {
     // variable to hold list of states
     const [statesList, setStatesList] = useState([] as ListItem[])
@@ -53,7 +51,7 @@ function States({
         return () => {
             isMounted = false
         }
-    }, [selectedCountry, reloadVar])
+    }, [selectedCountry])
 
     return (
         <div className={styles.main}>
