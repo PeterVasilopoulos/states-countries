@@ -14,10 +14,10 @@ function App() {
   const [reloadVar, setReloadVar] = useState(false as boolean)
 
   // variable to hold the selected country
-  const [selectedCountry, setSelectedCountry] = useState({} as ListItem)
+  const [selectedCountry, setSelectedCountry] = useState({id: 0, code: '', name: ''} as ListItem)
 
   // variable to hold the selected state
-  const [selectedState, setSelectedState] = useState({} as ListItem)
+  const [selectedState, setSelectedState] = useState({id: 0, code: '', name: ''} as ListItem)
 
   // variable to decide which item is added
   const [itemToAdd, setItemToAdd] = useState('Country')
