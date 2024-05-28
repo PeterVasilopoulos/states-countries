@@ -43,8 +43,7 @@ function Countries({
                         a.name.localeCompare(b.name)
                     ))
                 }
-            }
-            )
+            })
         }
 
         // run function

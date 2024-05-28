@@ -7,6 +7,9 @@ interface CountryFormData {
     code: string;
 }
 
+// POST URL
+const POST_URL: string = 'https://xc-countries-api.fly.dev/api/countries/'
+
 function CountryForm() {
     // variable to hold the form data
     const [formData, setFormData] = useState({name: '', code: ''} as CountryFormData);
@@ -16,8 +19,8 @@ function CountryForm() {
 
     // handle change input data
     function handleChangeInput(e: any) {
-        setFormData({...formData, [e.target.name]: e.target.value})
-        console.log(e.target.value)
+        setFormData({...formData, [e.target.name]: e.target.value});
+        console.log(e.target.value);
     }
 
     // handle submit form
@@ -25,11 +28,24 @@ function CountryForm() {
         // prevent page from reloading
         e.preventDefault();
 
-        // log the data
-        console.log(formData)
+        // post function
+        async function postFormData(url: string, data: CountryFormData) {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+
+            return response.json();
+        }
+
+        // call post function
+        console.log(postFormData(POST_URL, formData));
 
         // reset formData
-        setFormData({name: '', code: ''} as CountryFormData)
+        setFormData({name: '', code: ''} as CountryFormData);
     }
 
     return (
