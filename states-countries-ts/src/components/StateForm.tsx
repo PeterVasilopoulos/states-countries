@@ -4,6 +4,8 @@ import styles from '../styles/Form.module.css';
 import Button from "./Button";
 
 interface StateFormProps {
+    reloadVar: boolean;
+    setReloadVar: (bool: boolean) => void;
     countriesList: ListItem[];
 }
 
@@ -16,7 +18,7 @@ interface StateFormData {
 // post url
 const POST_URL = "https://xc-countries-api.fly.dev/api/states/"
 
-function StateForm({countriesList}: StateFormProps) {
+function StateForm({reloadVar, setReloadVar, countriesList}: StateFormProps) {
     // variable to hold form data
     const [formData, setFormData] = useState({name: '', code: '', countryId: -1})
 
@@ -43,6 +45,9 @@ function StateForm({countriesList}: StateFormProps) {
                 body: JSON.stringify(data)
             })
 
+            // flip reloadVar
+            setReloadVar(!reloadVar)
+
             return response.json();
         }
 
@@ -61,6 +66,7 @@ function StateForm({countriesList}: StateFormProps) {
                 <input 
                     type="text" 
                     name="name" 
+                    id="name"
                     className={styles.input}
                     value={name}
                     onChange={handleChangeInput}
@@ -73,6 +79,7 @@ function StateForm({countriesList}: StateFormProps) {
                 <input 
                     type="text" 
                     name="code" 
+                    id="code"
                     className={styles.input} 
                     value={code}
                     onChange={handleChangeInput}
@@ -84,6 +91,7 @@ function StateForm({countriesList}: StateFormProps) {
                 <label htmlFor="countryId">Country:</label>
                 <select 
                     name="countryId" 
+                    id="countryId"
                     className={styles.input}
                     value={countryId}
                     onChange={handleChangeInput}

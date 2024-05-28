@@ -2,6 +2,11 @@ import { useState } from 'react';
 import styles from '../styles/Form.module.css';
 import Button from './Button';
 
+interface CountryFormProps {
+    reloadVar: boolean;
+    setReloadVar: (bool: boolean) => void;
+}
+
 interface CountryFormData {
     name: string;
     code: string;
@@ -10,7 +15,7 @@ interface CountryFormData {
 // POST URL
 const POST_URL: string = 'https://xc-countries-api.fly.dev/api/countries/'
 
-function CountryForm() {
+function CountryForm({setReloadVar, reloadVar}: CountryFormProps) {
     // variable to hold the form data
     const [formData, setFormData] = useState({name: '', code: ''} as CountryFormData);
 
@@ -37,6 +42,9 @@ function CountryForm() {
                 body: JSON.stringify(data)
             })
 
+            // flip reloadVar
+            setReloadVar(!reloadVar)
+
             return response.json();
         }
 
@@ -54,7 +62,8 @@ function CountryForm() {
                 <label htmlFor="name">Country Name:</label>
                 <input 
                     type="text" 
-                    name="name" 
+                    name="name"
+                    id="name"
                     className={styles.input} 
                     value={name}
                     onChange={handleChangeInput} 
@@ -67,6 +76,7 @@ function CountryForm() {
                 <input 
                     type="text" 
                     name="code" 
+                    id="code"
                     className={styles.input} 
                     value={code}
                     onChange={handleChangeInput} 

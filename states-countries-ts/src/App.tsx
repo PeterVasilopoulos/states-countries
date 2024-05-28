@@ -10,6 +10,9 @@ import CountryForm from './components/CountryForm';
 import StateForm from './components/StateForm';
 
 function App() {
+  // variable to reload data
+  const [reloadVar, setReloadVar] = useState(false as boolean)
+
   // variable to hold the selected country
   const [selectedCountry, setSelectedCountry] = useState({} as ListItem)
 
@@ -36,11 +39,13 @@ function App() {
             setSelectedState={setSelectedState}
             countriesList={countriesList}
             setCountriesList={setCountriesList}
+            reloadVar={reloadVar}
           />
           <States 
             selectedState={selectedState}
             setSelectedState={setSelectedState}
             selectedCountry={selectedCountry}
+            reloadVar={reloadVar}
           />
         </div>
       </div>
@@ -68,14 +73,14 @@ function App() {
         <div className={styles.content}>
           {
             itemToAdd === 'Country' ? 
-            <CountryForm />
+            <CountryForm reloadVar={reloadVar} setReloadVar={setReloadVar} />
             :
             <></>
           }
 
           {
             itemToAdd === 'State' ?
-            <StateForm countriesList={countriesList}/>
+            <StateForm reloadVar={reloadVar} setReloadVar={setReloadVar} countriesList={countriesList}/>
             :
             <></>
           }

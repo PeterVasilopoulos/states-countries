@@ -10,6 +10,7 @@ interface CountriesProps {
     setSelectedState: (stateObject: ListItem) => void;
     countriesList: ListItem[];
     setCountriesList: (countries: ListItem[]) => void;
+    reloadVar: boolean;
 }
 
 function Countries({
@@ -17,7 +18,8 @@ function Countries({
     setSelectedCountry,
     setSelectedState,
     countriesList,
-    setCountriesList
+    setCountriesList,
+    reloadVar
 }: CountriesProps) {
     // function to find and select country
     function findAndSetSelectedCountry(countryId: number) {
@@ -53,7 +55,7 @@ function Countries({
         return () => {
         isMounted = false
         }
-    }, [])
+    }, [reloadVar])
 
     return (
         <div className={styles.main}>
