@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styles from '../styles/Form.module.css';
 import Button from './Button';
 
@@ -15,7 +15,7 @@ interface CountryFormData {
 // POST URL
 const POST_URL: string = "https://xc-countries-api.fly.dev/api/countries/"
 
-function CountryForm({setReloadVar, reloadVar}: CountryFormProps) {
+function CountryForm({reloadVar, setReloadVar}: CountryFormProps) {
     // variable to hold the form data
     const [formData, setFormData] = useState({name: '', code: ''} as CountryFormData);
 
@@ -23,12 +23,12 @@ function CountryForm({setReloadVar, reloadVar}: CountryFormProps) {
     const {name, code} = formData;
 
     // handle change input data
-    function handleChangeInput(e: any) {
+    function handleChangeInput(e: React.ChangeEvent<HTMLInputElement>) {
         setFormData({...formData, [e.target.name]: e.target.value});
     }
 
     // handle submit form
-    function handleSubmit(e: any) {
+    function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
         // prevent page from reloading
         e.preventDefault();
 

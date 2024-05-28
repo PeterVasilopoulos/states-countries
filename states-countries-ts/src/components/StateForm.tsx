@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { ReactText, useState } from "react";
 import { ListItem } from "../types/ListItem";
 import styles from '../styles/Form.module.css';
 import Button from "./Button";
@@ -26,12 +26,17 @@ function StateForm({reloadVar, setReloadVar, countriesList}: StateFormProps) {
     const {name, code, countryId} = formData;
 
     // handle change input data
-    function handleChangeInput(e: any) {
+    function handleChangeInput(e: React.ChangeEvent<HTMLInputElement>) {
         setFormData({...formData, [e.target.name]: e.target.value});
     }
 
+    // handle change select data
+    function handleChangeSelect(e: React.ChangeEvent<HTMLSelectElement>) {
+        setFormData({...formData, [e.target.name]: e.target.value})
+    }
+
     // handle submit form function
-    function handleSubmit(e: any) {
+    function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
         // prevent page from reloading
         e.preventDefault();
 
@@ -94,7 +99,7 @@ function StateForm({reloadVar, setReloadVar, countriesList}: StateFormProps) {
                     id="countryId"
                     className={styles.input}
                     value={countryId}
-                    onChange={handleChangeInput}
+                    onChange={handleChangeSelect}
                 >
                     {countriesList.map((country) => {
                         return (

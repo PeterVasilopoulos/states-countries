@@ -2,7 +2,7 @@ import styles from '../styles/Button.module.css';
 
 interface ButtonProps {
     children: string;
-    handle: (e: any) => void;
+    handle: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 function Button({children, handle}: ButtonProps) {
