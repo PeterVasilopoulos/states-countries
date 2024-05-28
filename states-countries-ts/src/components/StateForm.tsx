@@ -14,7 +14,7 @@ function StateForm({countriesList}: StateFormProps) {
     }
 
     return (
-        <form>
+        <form method="POST">
             {/* State Name */}
             <div className={styles.inputBlock}>
                 <label htmlFor="name">State Name:</label>
