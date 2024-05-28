@@ -20,7 +20,6 @@ function CountryForm() {
     // handle change input data
     function handleChangeInput(e: any) {
         setFormData({...formData, [e.target.name]: e.target.value});
-        console.log(e.target.value);
     }
 
     // handle submit form
@@ -42,10 +41,10 @@ function CountryForm() {
         }
 
         // call post function
-        console.log(postFormData(POST_URL, formData));
+        postFormData(POST_URL, formData);
 
         // reset formData
-        setFormData({name: '', code: ''} as CountryFormData);
+        setFormData({name: '', code: ''});
     }
 
     return (
