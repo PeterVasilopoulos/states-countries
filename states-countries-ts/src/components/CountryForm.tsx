@@ -13,7 +13,7 @@ interface CountryFormData {
 }
 
 // POST URL
-const POST_URL: string = 'https://xc-countries-api.fly.dev/api/countries/'
+const POST_URL: string = "https://xc-countries-api.fly.dev/api/countries/"
 
 function CountryForm({setReloadVar, reloadVar}: CountryFormProps) {
     // variable to hold the form data

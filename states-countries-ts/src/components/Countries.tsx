@@ -26,7 +26,7 @@ function Countries({
         const country = countriesList.find(c => c.id === countryId);
         setSelectedCountry(country as ListItem);
         // reset state when new country is selected
-        setSelectedState({} as ListItem)
+        setSelectedState({id: 0, code: '', name: ''} as ListItem)
     }
 
     // hook to pull country data from api

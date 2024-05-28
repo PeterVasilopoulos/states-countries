@@ -12,10 +12,9 @@ function Dropdown({selected, setSelected, list}: DropdownProps) {
         <select 
             className={styles.menu}
             value={selected.id}
-            defaultValue={""}
             onChange={e => setSelected(parseInt(e.target.value))}
         >
-            <option value="" disabled>Select an Item...</option>
+            <option value={0} disabled>Select an Item...</option>
 
             {/* map through list */}
             {list.map((item: ListItem) => {
