@@ -3,9 +3,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import type { ListItem } from './types/ListItem';
 
 import './styles/index.css';
+import styles from './styles/App.module.css';
 import Home from './pages/Home';
 import AddCountry from './pages/AddCountry';
 import AddState from './pages/AddState';
+import Navbar from './components/Navbar';
 
 function App() {
   // variable to hold the selected country
@@ -46,31 +48,41 @@ function App() {
 }, [])
 
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Home Page */}
-        <Route path='/' element={
-          <Home
-            selectedCountry={selectedCountry}
-            setSelectedCountry={setSelectedCountry}
-            selectedState={selectedState}
-            setSelectedState={setSelectedState}
-            countriesList={countriesList}
-          />
-        } />
+    <div>
+      {/* Navbar */}
+      <div className={styles.nav}>
+        <Navbar />
+      </div>
 
-        {/* Add Country Page */}
-        <Route path='addcountry' element={
-          <AddCountry countriesList={countriesList} />
-        } />
+      {/* Routes */}
+      <div className={styles.content}>
+        <BrowserRouter>
+          <Routes>
+            {/* Home Page */}
+            <Route path='/' element={
+              <Home
+              selectedCountry={selectedCountry}
+              setSelectedCountry={setSelectedCountry}
+                selectedState={selectedState}
+                setSelectedState={setSelectedState}
+                countriesList={countriesList}
+                />
+              } />
 
-        {/* Add State Page */}
-        <Route path='addstate' element={
-          <AddState countriesList={countriesList} />
-        } />
-        
-      </Routes>
-    </BrowserRouter>
+            {/* Add Country Page */}
+            <Route path='addcountry' element={
+              <AddCountry />
+            } />
+
+            {/* Add State Page */}
+            <Route path='addstate' element={
+              <AddState countriesList={countriesList} />
+            } />
+            
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </div>
   )
 }
 

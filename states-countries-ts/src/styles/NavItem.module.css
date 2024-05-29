@@ -1,0 +1,16 @@
+.navItem {
+    --word-bg-color: rgb(65, 93, 67);
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: var(--word-bg-color);
+    border: 1px solid var(--word-bg-color);
+    font-size: 20px;
+    margin: 5px;
+    user-select: none;
+}
+
+.navItem:hover {
+    background-color: rgb(99, 128, 101);
+    border: 1px solid white;
+}

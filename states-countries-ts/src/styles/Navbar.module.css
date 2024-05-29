@@ -1,0 +1,11 @@
+.navbar {
+    background-color: rgb(65, 93, 67);
+    border: 2px solid white;
+    border-radius: 6px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    min-width: 400px;
+}
