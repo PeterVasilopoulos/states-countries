@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import type { ListItem } from './types/ListItem';
 
 import './styles/index.css';
 import Home from './pages/Home';
 import AddCountry from './pages/AddCountry';
+import AddState from './pages/AddState';
 
 function App() {
   // variable to hold the selected country
@@ -15,6 +16,34 @@ function App() {
 
   // list of countries
   const [countriesList, setCountriesList] = useState([] as ListItem[])
+
+  // pull countries data from api
+  useEffect(() => {
+    // variable to check if component is mounted
+    let isMounted: boolean = true
+
+    // function to fetch country data
+    async function fetchData() {
+    await fetch("https://xc-countries-api.fly.dev/api/countries/")
+        .then(response => response.json())
+        .then(data => {
+            if(isMounted) {
+                // place sorted list into state
+                setCountriesList(data.sort((a: ListItem, b: ListItem) => 
+                    a.name.localeCompare(b.name)
+                ))
+            }
+        })
+    }
+
+    // run function
+    fetchData()
+
+    // cleanup
+    return () => {
+    isMounted = false
+    }
+}, [])
 
   return (
     <BrowserRouter>
@@ -27,15 +56,17 @@ function App() {
             selectedState={selectedState}
             setSelectedState={setSelectedState}
             countriesList={countriesList}
-            setCountriesList={setCountriesList}
           />
         } />
 
         {/* Add Country Page */}
-        <Route path='AddCountry' element={
-          <AddCountry 
-            countriesList={countriesList}
-          />
+        <Route path='addcountry' element={
+          <AddCountry countriesList={countriesList} />
+        } />
+
+        {/* Add State Page */}
+        <Route path='addstate' element={
+          <AddState countriesList={countriesList} />
         } />
         
       </Routes>

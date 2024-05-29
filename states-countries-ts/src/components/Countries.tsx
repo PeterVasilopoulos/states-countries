@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Dropdown from "./Dropdown";
 import type { ListItem } from "../types/ListItem";
 
@@ -9,15 +8,13 @@ interface CountriesProps {
     setSelectedCountry: (countryObject: ListItem) => void;
     setSelectedState: (stateObject: ListItem) => void;
     countriesList: ListItem[];
-    setCountriesList: (countries: ListItem[]) => void;
 }
 
 function Countries({
     selectedCountry,
     setSelectedCountry,
     setSelectedState,
-    countriesList,
-    setCountriesList
+    countriesList
 }: CountriesProps) {
     // function to find and select country
     function findAndSetSelectedCountry(countryId: number) {
@@ -26,34 +23,6 @@ function Countries({
         // reset state when new country is selected
         setSelectedState({id: 0, code: '', name: ''} as ListItem)
     }
-
-    // hook to pull country data from api
-    useEffect(() => {
-        // variable to check if component is mounted
-        let isMounted: boolean = true
-
-        // function to fetch country data
-        async function fetchData() {
-        await fetch("https://xc-countries-api.fly.dev/api/countries/")
-            .then(response => response.json())
-            .then(data => {
-                if(isMounted) {
-                    // place sorted list into state
-                    setCountriesList(data.sort((a: ListItem, b: ListItem) => 
-                        a.name.localeCompare(b.name)
-                    ))
-                }
-            })
-        }
-
-        // run function
-        fetchData()
-
-        // cleanup
-        return () => {
-        isMounted = false
-        }
-    }, [])
 
     return (
         <div className={styles.main}>

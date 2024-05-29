@@ -1,4 +1,4 @@
-import React, { ReactText, useState } from "react";
+import React, { useState } from "react";
 import { ListItem } from "../types/ListItem";
 import styles from '../styles/Form.module.css';
 import Button from "./Button";

@@ -9,7 +9,6 @@ interface HomeProps {
     selectedState: ListItem;
     setSelectedState: (statObject: ListItem) => void;
     countriesList: ListItem[];
-    setCountriesList: (countries: ListItem[]) => void;
 }
 
 function Home({
@@ -17,8 +16,7 @@ function Home({
     setSelectedCountry,
     selectedState,
     setSelectedState,
-    countriesList,
-    setCountriesList
+    countriesList
 }: HomeProps) {
     return (
         <div className={styles.box}>
@@ -31,7 +29,6 @@ function Home({
                     setSelectedCountry={setSelectedCountry}
                     setSelectedState={setSelectedState}
                     countriesList={countriesList}
-                    setCountriesList={setCountriesList}
                 />
                 <States
                     selectedState={selectedState}
