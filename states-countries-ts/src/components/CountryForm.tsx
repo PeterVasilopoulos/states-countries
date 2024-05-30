@@ -69,7 +69,7 @@ function CountryForm() {
     }
 
     return (
-        <form method="POST">
+        <form>
             {/* Status Checking */}
 
             {/* Missing Fields */}
@@ -77,7 +77,7 @@ function CountryForm() {
                 <div className={`${styles.error} ${styles.status}`}>
                     Please fill out all fields
                 </div>
-            : <></>
+            : null
             }
 
             {/* Code In Use */}
@@ -85,7 +85,7 @@ function CountryForm() {
                 <div className={`${styles.error} ${styles.status}`}>
                     Code already in use
                 </div>
-            : <></>
+            : null
             }
 
             {/* Country Submitted */}
@@ -93,7 +93,7 @@ function CountryForm() {
                 <div className={styles.status}>
                     Country successfully submitted
                 </div>
-            : <></>
+            : null
             }
 
 

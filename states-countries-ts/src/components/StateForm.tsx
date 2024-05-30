@@ -80,7 +80,7 @@ function StateForm({countriesList}: StateFormProps) {
     }
 
     return (
-        <form method="POST">
+        <form>
             {/* Status Checking */}
             
             {/* Missing Fields */}
@@ -88,7 +88,7 @@ function StateForm({countriesList}: StateFormProps) {
                 <div className={`${styles.error} ${styles.status}`}>
                     Please fill out all fields
                 </div>
-            : <></>
+            : null
             }
 
             {/* Code In Use */}
@@ -96,15 +96,15 @@ function StateForm({countriesList}: StateFormProps) {
                 <div className={`${styles.error} ${styles.status}`}>
                     Code already in use
                 </div>
-            : <></>
+            : null
             }
 
-            {/* Country Submitted */}
+            {/* State Submitted */}
             {status === 'submitted' ? 
                 <div className={styles.status}>
-                    Country successfully submitted
+                    State successfully submitted
                 </div>
-            : <></>
+            : null
             }
 
 
