@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import type { ListItem } from './types/ListItem';
 
 import './styles/index.css';
@@ -51,6 +51,7 @@ function App() {
       {/* Routes */}
       <div className={styles.content}>
         <Routes>
+
           {/* Home Page */}
           <Route path='/' element={
             <Home countriesList={countriesList} />

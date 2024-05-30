@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ListItem } from "../types/ListItem";
 import styles from '../styles/Form.module.css';
 import Button from "./Button";
+import { StatusOptions } from "../types/StatusOptions";
 
 interface StateFormProps {
     countriesList: ListItem[];
@@ -14,14 +15,14 @@ interface StateFormData {
 }
 
 // post url
-const POST_URL = "https://xc-countries-api.fly.dev/api/states/"
+const POST_URL = "https://xc-countries-api.fly.dev/api/states/";
 
 function StateForm({countriesList}: StateFormProps) {
     // variable to hold form data
     const [formData, setFormData] = useState({name: '', code: '', countryId: -1})
 
-    // error check variable
-    const [hasError, setHasError] = useState(false);
+    // status variable
+    const [status, setStatus] = useState('none' as StatusOptions)
 
     // destructure formData to use in value attribute of inputs
     const {name, code, countryId} = formData;
@@ -44,12 +45,11 @@ function StateForm({countriesList}: StateFormProps) {
         // post function
         async function postFormData(url: string, data: StateFormData) {
             // check if name or code is empty
-            if(!data.name || !data.code || data.countryId === 0) {
-                setHasError(true);
-                console.log(data)
+            if(!data.name || !data.code || data.countryId === -1) {
+                setStatus('missing')
                 return
             } else {
-                setHasError(false)
+                setStatus('none')
             }
             
             const response = await fetch(url, {
@@ -59,6 +59,15 @@ function StateForm({countriesList}: StateFormProps) {
                 },
                 body: JSON.stringify(data)
             })
+
+            // check for 409 error
+            if(response.status === 409) {
+                setStatus('codeInUse');
+                return;
+            }
+
+            // set status to submitted
+            setStatus('submitted')
 
             return response.json();
         }
@@ -72,14 +81,33 @@ function StateForm({countriesList}: StateFormProps) {
 
     return (
         <form method="POST">
-            {/* Error */}
-            {hasError ?
-                <div className={styles.error}>
+            {/* Status Checking */}
+            
+            {/* Missing Fields */}
+            {status === 'missing' ? 
+                <div className={`${styles.error} ${styles.status}`}>
                     Please fill out all fields
                 </div>
-            :
-                <></>
+            : <></>
             }
+
+            {/* Code In Use */}
+            {status === 'codeInUse' ? 
+                <div className={`${styles.error} ${styles.status}`}>
+                    Code already in use
+                </div>
+            : <></>
+            }
+
+            {/* Country Submitted */}
+            {status === 'submitted' ? 
+                <div className={styles.status}>
+                    Country successfully submitted
+                </div>
+            : <></>
+            }
+
+
 
             {/* State Name */}
             <div className={styles.inputBlock}>

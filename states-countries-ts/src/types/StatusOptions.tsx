@@ -1,0 +1,1 @@
+export type StatusOptions = 'none' | 'missing' | 'codeInUse' | 'submitted';

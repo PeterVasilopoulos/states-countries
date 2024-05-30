@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from '../styles/Form.module.css';
 import Button from './Button';
+import { StatusOptions } from '../types/StatusOptions';
 
 interface CountryFormData {
     name: string;
@@ -8,14 +9,14 @@ interface CountryFormData {
 }
 
 // POST URL
-const POST_URL: string = "https://xc-countries-api.fly.dev/api/countries/"
+const POST_URL: string = "https://xc-countries-api.fly.dev/api/countries/";
 
 function CountryForm() {
     // variable to hold the form data
     const [formData, setFormData] = useState({name: '', code: ''} as CountryFormData);
 
-    // error check variable
-    const [hasError, setHasError] = useState(false);
+    // status variable
+    const [status, setStatus] = useState('none' as StatusOptions);
 
     // destructure formData to use in value attribute of inputs
     const {name, code} = formData;
@@ -34,11 +35,10 @@ function CountryForm() {
         async function postFormData(url: string, data: CountryFormData) {
             // check if name or code are empty
             if(!data.name || !data.code) {
-                setHasError(true);
-                console.log(hasError);
+                setStatus('missing')
                 return
             } else {
-                setHasError(true)
+                setStatus('none')
             }
 
             const response = await fetch(url, {
@@ -48,7 +48,16 @@ function CountryForm() {
                 },
                 body: JSON.stringify(data)
             })
+            
+            // check for 409 error
+            if(response.status === 409) {
+                setStatus('codeInUse');
+                return;
+            }
 
+            // set status to submitted
+            setStatus('submitted');
+            
             return response.json();
         }
 
@@ -61,12 +70,33 @@ function CountryForm() {
 
     return (
         <form method="POST">
-            {/* Error */}
-                {hasError ? 
-                    <div className={styles.error}>
-                        Please fill out all fields
-                    </div> 
-                : <></>}
+            {/* Status Checking */}
+
+            {/* Missing Fields */}
+            {status === 'missing' ? 
+                <div className={`${styles.error} ${styles.status}`}>
+                    Please fill out all fields
+                </div>
+            : <></>
+            }
+
+            {/* Code In Use */}
+            {status === 'codeInUse' ? 
+                <div className={`${styles.error} ${styles.status}`}>
+                    Code already in use
+                </div>
+            : <></>
+            }
+
+            {/* Country Submitted */}
+            {status === 'submitted' ? 
+                <div className={styles.status}>
+                    Country successfully submitted
+                </div>
+            : <></>
+            }
+
+
 
             {/* Country Name */}
             <div className={styles.inputBlock}>

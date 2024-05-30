@@ -16,9 +16,12 @@
     justify-content: center;
 }
 
-.error {
-    color: rgb(172, 24, 24);
+.status {
     font-weight: bold;
     text-align: center;
     margin-bottom: 20px;
+}
+
+.error {
+    color: rgb(172, 24, 24);
 }
