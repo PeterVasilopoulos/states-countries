@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styles from '../styles/NavItem.module.css';
 
 interface NavItemProps {
@@ -6,9 +7,10 @@ interface NavItemProps {
 }
 
 function NavItem({children, page}: NavItemProps) {
+    const nav = useNavigate();
 
     function handleClick() {
-
+        nav(page);
     }
 
     return (

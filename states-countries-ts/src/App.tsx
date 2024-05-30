@@ -56,31 +56,29 @@ function App() {
 
       {/* Routes */}
       <div className={styles.content}>
-        <BrowserRouter>
-          <Routes>
-            {/* Home Page */}
-            <Route path='/' element={
-              <Home
-              selectedCountry={selectedCountry}
-              setSelectedCountry={setSelectedCountry}
-                selectedState={selectedState}
-                setSelectedState={setSelectedState}
-                countriesList={countriesList}
-                />
-              } />
-
-            {/* Add Country Page */}
-            <Route path='addcountry' element={
-              <AddCountry />
+        <Routes>
+          {/* Home Page */}
+          <Route path='/' element={
+            <Home
+            selectedCountry={selectedCountry}
+            setSelectedCountry={setSelectedCountry}
+              selectedState={selectedState}
+              setSelectedState={setSelectedState}
+              countriesList={countriesList}
+              />
             } />
 
-            {/* Add State Page */}
-            <Route path='addstate' element={
-              <AddState countriesList={countriesList} />
-            } />
-            
-          </Routes>
-        </BrowserRouter>
+          {/* Add Country Page */}
+          <Route path='/addcountry' element={
+            <AddCountry />
+          } />
+
+          {/* Add State Page */}
+          <Route path='/addstate' element={
+            <AddState countriesList={countriesList} />
+          } />
+          
+        </Routes>
       </div>
     </div>
   )

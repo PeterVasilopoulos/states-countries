@@ -20,6 +20,9 @@ function StateForm({countriesList}: StateFormProps) {
     // variable to hold form data
     const [formData, setFormData] = useState({name: '', code: '', countryId: -1})
 
+    // error check variable
+    const [hasError, setHasError] = useState(false);
+
     // destructure formData to use in value attribute of inputs
     const {name, code, countryId} = formData;
 
@@ -40,6 +43,15 @@ function StateForm({countriesList}: StateFormProps) {
 
         // post function
         async function postFormData(url: string, data: StateFormData) {
+            // check if name or code is empty
+            if(!data.name || !data.code || data.countryId === 0) {
+                setHasError(true);
+                console.log(data)
+                return
+            } else {
+                setHasError(false)
+            }
+            
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
@@ -60,6 +72,15 @@ function StateForm({countriesList}: StateFormProps) {
 
     return (
         <form method="POST">
+            {/* Error */}
+            {hasError ?
+                <div className={styles.error}>
+                    Please fill out all fields
+                </div>
+            :
+                <></>
+            }
+
             {/* State Name */}
             <div className={styles.inputBlock}>
                 <label htmlFor="name">State Name:</label>
@@ -96,6 +117,8 @@ function StateForm({countriesList}: StateFormProps) {
                     value={countryId}
                     onChange={handleChangeSelect}
                 >
+                    <option value={-1} disabled>Select a Country...</option>
+
                     {countriesList.map((country) => {
                         return (
                             <option 

@@ -14,6 +14,9 @@ function CountryForm() {
     // variable to hold the form data
     const [formData, setFormData] = useState({name: '', code: ''} as CountryFormData);
 
+    // error check variable
+    const [hasError, setHasError] = useState(false);
+
     // destructure formData to use in value attribute of inputs
     const {name, code} = formData;
 
@@ -29,6 +32,15 @@ function CountryForm() {
 
         // post function
         async function postFormData(url: string, data: CountryFormData) {
+            // check if name or code are empty
+            if(!data.name || !data.code) {
+                setHasError(true);
+                console.log(hasError);
+                return
+            } else {
+                setHasError(true)
+            }
+
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
@@ -49,6 +61,13 @@ function CountryForm() {
 
     return (
         <form method="POST">
+            {/* Error */}
+                {hasError ? 
+                    <div className={styles.error}>
+                        Please fill out all fields
+                    </div> 
+                : <></>}
+
             {/* Country Name */}
             <div className={styles.inputBlock}>
                 <label htmlFor="name">Country Name:</label>
