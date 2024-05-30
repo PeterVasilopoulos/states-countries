@@ -10,12 +10,6 @@ import AddState from './pages/AddState';
 import Navbar from './components/Navbar';
 
 function App() {
-  // variable to hold the selected country
-  const [selectedCountry, setSelectedCountry] = useState({id: 0, code: '', name: ''} as ListItem)
-
-  // variable to hold the selected state
-  const [selectedState, setSelectedState] = useState({id: 0, code: '', name: ''} as ListItem)
-
   // list of countries
   const [countriesList, setCountriesList] = useState([] as ListItem[])
 
@@ -59,13 +53,7 @@ function App() {
         <Routes>
           {/* Home Page */}
           <Route path='/' element={
-            <Home
-            selectedCountry={selectedCountry}
-            setSelectedCountry={setSelectedCountry}
-              selectedState={selectedState}
-              setSelectedState={setSelectedState}
-              countriesList={countriesList}
-              />
+            <Home countriesList={countriesList} />
             } />
 
           {/* Add Country Page */}
