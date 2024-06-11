@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using StatesCountriesApi.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
 namespace StatesCountriesApi.Controllers
 {
@@ -17,7 +16,7 @@ namespace StatesCountriesApi.Controllers
         }
 
 
-        // GET
+        // GET All
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Country>>> GetCountries()
         {

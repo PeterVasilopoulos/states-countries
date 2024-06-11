@@ -15,7 +15,46 @@ namespace StatesCountriesApi.Controllers
             _context = context;
         }
 
-        // GET All
 
+        // GET All
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<State>>> GetStates()
+        {
+            return await _context.States.ToListAsync();
+        }
+
+
+        // GET One
+        [HttpGet("{id}")]
+        public async Task<ActionResult<State>> GetState(long id)
+        {
+            var state = await _context.States.FindAsync(id);
+
+            if(state == null)
+            {
+                return NotFound();
+            }
+
+            return state;
+        }
+
+
+        // GET All with country code
+        [HttpGet("/countries/{countryCode}/states")]
+        public async Task<ActionResult<IEnumerable<State>>> GetStatesWithCountry()
+        {
+            return await _context.States.ToListAsync();
+        }
+
+
+        // POST
+        [HttpPost]
+        public async Task<ActionResult<State>> PostState(State state)
+        {
+            _context.States.Add(state);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetState), new { id = state.Id }, state);
+        }
     }
 }
