@@ -8,6 +8,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddDbContext<CountryContext>(opt =>
     opt.UseInMemoryDatabase("Countries"));
+builder.Services.AddDbContext<StateContext>(opt =>
+    opt.UseInMemoryDatabase("States"));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

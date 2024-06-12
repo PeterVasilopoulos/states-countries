@@ -10,4 +10,5 @@ public class StateContext : DbContext
     }
 
     public DbSet<State> States { get; set; } = null!;
+    // public DbSet<Country> Countries { get; set; } = null!;
 }

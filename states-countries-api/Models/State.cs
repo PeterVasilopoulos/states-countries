@@ -6,6 +6,6 @@ public class State
     public required string Name { get; set; }
     public required string Code { get; set; }
 
-    public required string CountryCode { get; set; }
-    // public Country Country { get; set; }
+    public required long CountryId { get; set; }
+    public Country? Country { get; set; }
 }
