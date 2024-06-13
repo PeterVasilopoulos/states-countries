@@ -8,6 +8,7 @@ public class State
     public required string Code { get; set; }
 
     public required long CountryId { get; set; }
+
     [JsonIgnore]
     public Country? Country { get; set; }
 }

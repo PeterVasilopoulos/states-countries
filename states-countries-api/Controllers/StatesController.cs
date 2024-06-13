@@ -8,9 +8,9 @@ namespace StatesCountriesApi.Controllers
     [ApiController]
     public class StatesController : ControllerBase
     {
-        private readonly StateContext _context;
+        private readonly ApiContext _context;
 
-        public StatesController(StateContext context)
+        public StatesController(ApiContext context)
         {
             _context = context;
         }
@@ -43,7 +43,8 @@ namespace StatesCountriesApi.Controllers
         [HttpGet("country/{countryCode}")]
         public async Task<ActionResult<IEnumerable<State>>> GetStatesWithCountry(string countryCode)
         {
-            var countryStates = _context.States.Where(s => s.Country!.Code.ToLower() == countryCode.ToLower());
+            var countryStates = _context.States
+                .Where(s => s.Country!.Code.ToLower() == countryCode.ToLower());
 
             return await countryStates.ToListAsync();
         }

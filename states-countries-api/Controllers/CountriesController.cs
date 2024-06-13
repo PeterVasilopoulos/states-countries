@@ -8,9 +8,9 @@ namespace StatesCountriesApi.Controllers
     [ApiController]
     public class CountriesController : ControllerBase
     {
-        private readonly CountryContext _context;
+        private readonly ApiContext _context;
 
-        public CountriesController(CountryContext context)
+        public CountriesController(ApiContext context)
         {
             _context = context;
         }
