@@ -40,19 +40,10 @@ namespace StatesCountriesApi.Controllers
 
 
         // GET All with country code
-        [HttpGet("/countries/{countryCode}/states")]
+        [HttpGet("country/{countryCode}")]
         public async Task<ActionResult<IEnumerable<State>>> GetStatesWithCountry(string countryCode)
         {
-            // var statesWithCountry = _context.States.Where(s => s.CountryCode.ToLower() == countryCode);
-
-            // return await statesWithCountry.ToListAsync();
-
-            var countryStates = _context.States.Where(s => s.Country.Code.ToLower() == countryCode.ToLower());
-
-            if(countryStates == null)
-            {
-                return NotFound();
-            }
+            var countryStates = _context.States.Where(s => s.Country!.Code.ToLower() == countryCode.ToLower());
 
             return await countryStates.ToListAsync();
         }
@@ -62,17 +53,6 @@ namespace StatesCountriesApi.Controllers
         [HttpPost]
         public async Task<ActionResult<State>> PostState(State state)
         {
-            // find country from CountryCode
-            // var country = _context.Countries.Where(c => c.Code.ToLower() == state.CountryCode);
-
-            // add state to country's state list
-            // country.ElementAt(0).States.Add(state);
-
-            // call PutCountry to update country?
-
-            // add country to state
-            // state.Country = country.ElementAt(0);
-
             _context.States.Add(state);
             await _context.SaveChangesAsync();
 
