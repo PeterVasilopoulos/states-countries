@@ -54,6 +54,16 @@ namespace StatesCountriesApi.Controllers
         [HttpPost]
         public async Task<ActionResult<State>> PostState(State state)
         {
+            var checkStateCode = await _context.States
+                .Where(s => s.CountryId == state.CountryId)
+                .Where(s => s.Code.ToLower() == state.Code.ToLower())
+                .FirstOrDefaultAsync();
+
+            if(checkStateCode != null)
+            {
+                return BadRequest("State code already in use");
+            }
+
             _context.States.Add(state);
             await _context.SaveChangesAsync();
 
