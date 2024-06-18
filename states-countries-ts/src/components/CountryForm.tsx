@@ -3,15 +3,21 @@ import styles from '../styles/Form.module.css';
 import Button from './Button';
 import { StatusOptions } from '../types/StatusOptions';
 
+interface CountryFormProps {
+    setChangeMade: (value: boolean) => void;
+}
+
 interface CountryFormData {
     name: string;
     code: string;
 }
 
-// POST URL
+// Post country url
 const POST_URL: string = "http://localhost:5257/api/Countries";
 
-function CountryForm() {
+function CountryForm({
+    setChangeMade
+}: CountryFormProps) {
     // variable to hold the form data
     const [formData, setFormData] = useState({name: '', code: ''} as CountryFormData);
 
@@ -57,6 +63,9 @@ function CountryForm() {
 
             // set status to submitted
             setStatus('submitted');
+
+            // set changeMade to true
+            setChangeMade(true);
             
             return response.json();
         }

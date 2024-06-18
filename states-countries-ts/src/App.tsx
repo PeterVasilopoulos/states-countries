@@ -9,40 +9,36 @@ import AddCountry from './pages/AddCountry';
 import AddState from './pages/AddState';
 import Navbar from './components/Navbar';
 
+// Get all countries url
 const GET_URL = "http://localhost:5257/api/Countries"
 
 function App() {
   // list of countries
-  const [countriesList, setCountriesList] = useState([] as ListItem[])
+  const [countriesList, setCountriesList] = useState([] as ListItem[]);
+
+  // variable to check if a change has been made
+  const [changeMade, setChangeMade] = useState(true as boolean);
 
   // pull countries data from api
   useEffect(() => {
-    // variable to check if component is mounted
-    let isMounted: boolean = true
-
-    // function to fetch country data
-    async function fetchData() {
-    await fetch(GET_URL)
-        .then(response => response.json())
-        .then(data => {
-          console.log(data)
-            if(isMounted) {
-                // place sorted list into state
-                setCountriesList(data.sort((a: ListItem, b: ListItem) => 
-                    a.name.localeCompare(b.name)
-                ))
-            }
-        })
+    if(changeMade) {
+      getCountries();
+      setChangeMade(false);
     }
+  }, [changeMade])
 
-    // run function
-    fetchData()
-
-    // cleanup
-    return () => {
-    isMounted = false
-    }
-}, [])
+  // get country data function
+  async function getCountries() {
+    return await fetch(GET_URL)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        // place sorted list into state
+        setCountriesList(data.sort((a: ListItem, b: ListItem) => 
+            a.name.localeCompare(b.name)
+        ))
+      })
+  }
 
   return (
     <div>
@@ -62,12 +58,17 @@ function App() {
 
           {/* Add Country Page */}
           <Route path='/addcountry' element={
-            <AddCountry />
+            <AddCountry 
+              setChangeMade={setChangeMade} 
+            />
           } />
 
           {/* Add State Page */}
           <Route path='/addstate' element={
-            <AddState countriesList={countriesList} />
+            <AddState 
+              setChangeMade={setChangeMade} 
+              countriesList={countriesList} 
+            />
           } />
           
         </Routes>
