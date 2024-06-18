@@ -15,7 +15,7 @@ interface StateFormData {
 }
 
 // post url
-const POST_URL = "https://xc-countries-api.fly.dev/api/states/";
+const POST_URL : string = "http://localhost:5257/api/States";
 
 function StateForm({countriesList}: StateFormProps) {
     // variable to hold form data

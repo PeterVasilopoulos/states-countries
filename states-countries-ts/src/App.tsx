@@ -9,7 +9,7 @@ import AddCountry from './pages/AddCountry';
 import AddState from './pages/AddState';
 import Navbar from './components/Navbar';
 
-const GetCountriesURL = "http://localhost:5257/api/Countries"
+const GET_URL = "http://localhost:5257/api/Countries"
 
 function App() {
   // list of countries
@@ -22,7 +22,7 @@ function App() {
 
     // function to fetch country data
     async function fetchData() {
-    await fetch(GetCountriesURL)
+    await fetch(GET_URL)
         .then(response => response.json())
         .then(data => {
           console.log(data)

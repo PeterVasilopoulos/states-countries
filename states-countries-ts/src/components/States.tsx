@@ -10,7 +10,7 @@ interface StatesProps {
 }
 
 // GET States URL
-const GetStatesURL = "http://localhost:5257/api/States/country/";
+const GET_URL : string = "http://localhost:5257/api/States/Country/";
 
 function States({
     selectedState, 
@@ -33,7 +33,7 @@ function States({
 
         // function to fetch state data
         async function fetchData() {
-        await fetch(`${GetStatesURL}${selectedCountry.code}`)
+        await fetch(`${GET_URL}${selectedCountry.code}`)
             .then(response => response.json())
             .then(data => {
                 if(isMounted) {

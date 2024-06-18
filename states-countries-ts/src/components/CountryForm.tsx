@@ -9,7 +9,7 @@ interface CountryFormData {
 }
 
 // POST URL
-const POST_URL: string = "https://xc-countries-api.fly.dev/api/countries/";
+const POST_URL: string = "http://localhost:5257/api/Countries";
 
 function CountryForm() {
     // variable to hold the form data

@@ -40,7 +40,7 @@ namespace StatesCountriesApi.Controllers
 
 
         // GET All with country code
-        [HttpGet("country/{countryCode}")]
+        [HttpGet("Country/{countryCode}")]
         public async Task<ActionResult<IEnumerable<State>>> GetStatesWithCountry(string countryCode)
         {
             var countryStates = _context.States
