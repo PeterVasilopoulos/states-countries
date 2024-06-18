@@ -1,6 +1,24 @@
 using Microsoft.EntityFrameworkCore;
 using StatesCountriesApi.Models;
+
+var MyAllowSpecifiOrigins = "_myAllowSpecificOrigins";
+
 var builder = WebApplication.CreateBuilder(args);
+
+// CORS Policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecifiOrigins,
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:5257/api/Countries",
+                "http://localhost:5257",
+                "localhost:5257",
+                "http://localhost:5173")
+                .AllowAnyHeader();
+        }
+    );
+});
 
 // Add services to the container.
 
@@ -25,6 +43,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(MyAllowSpecifiOrigins);
 
 app.UseHttpsRedirection();
 

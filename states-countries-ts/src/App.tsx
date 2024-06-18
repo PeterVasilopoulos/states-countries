@@ -9,6 +9,8 @@ import AddCountry from './pages/AddCountry';
 import AddState from './pages/AddState';
 import Navbar from './components/Navbar';
 
+const GetCountriesURL = "http://localhost:5257/api/Countries"
+
 function App() {
   // list of countries
   const [countriesList, setCountriesList] = useState([] as ListItem[])
@@ -20,9 +22,10 @@ function App() {
 
     // function to fetch country data
     async function fetchData() {
-    await fetch("https://xc-countries-api.fly.dev/api/countries/")
+    await fetch(GetCountriesURL)
         .then(response => response.json())
         .then(data => {
+          console.log(data)
             if(isMounted) {
                 // place sorted list into state
                 setCountriesList(data.sort((a: ListItem, b: ListItem) => 
