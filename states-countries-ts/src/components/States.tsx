@@ -9,6 +9,9 @@ interface StatesProps {
     selectedCountry: ListItem;
 }
 
+// GET States URL
+const GetStatesURL = "http://localhost:5257/api/States/country/";
+
 function States({
     selectedState, 
     setSelectedState, 
@@ -30,7 +33,7 @@ function States({
 
         // function to fetch state data
         async function fetchData() {
-        await fetch(`https://xc-countries-api.fly.dev/api/countries/${selectedCountry.code}/states/`)
+        await fetch(`${GetStatesURL}${selectedCountry.code}`)
             .then(response => response.json())
             .then(data => {
                 if(isMounted) {
