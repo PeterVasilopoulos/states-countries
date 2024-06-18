@@ -3,12 +3,10 @@ import styles from '../styles/Home.module.css';
 import { ListItem } from '../types/ListItem';
 
 interface AddStateProps {
-    setChangeMade: (value: boolean) => void;
     countriesList: ListItem[];
 }
 
 function AddState({
-    setChangeMade,
     countriesList
 }: AddStateProps) {
     return (
@@ -19,7 +17,6 @@ function AddState({
             {/* Form */}
             <div className={styles.content}>
                 <StateForm 
-                    setChangeMade={setChangeMade}
                     countriesList={countriesList} 
                 />
             </div>

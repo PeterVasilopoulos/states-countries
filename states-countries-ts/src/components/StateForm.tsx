@@ -5,7 +5,6 @@ import Button from "./Button";
 import { StatusOptions } from "../types/StatusOptions";
 
 interface StateFormProps {
-    setChangeMade: (value: boolean) => void;
     countriesList: ListItem[];
 }
 
@@ -19,7 +18,6 @@ interface StateFormData {
 const POST_URL : string = "http://localhost:5257/api/States";
 
 function StateForm({
-    setChangeMade,
     countriesList
 }: StateFormProps) {
     // variable to hold form data
@@ -72,9 +70,6 @@ function StateForm({
 
             // set status to submitted
             setStatus('submitted')
-
-            // set changeMade to true
-            setChangeMade(true);
 
             return response.json();
         }
