@@ -58,16 +58,12 @@ function App() {
 
           {/* Add Country Page */}
           <Route path='/addcountry' element={
-            <AddCountry 
-              setChangeMade={setChangeMade} 
-            />
+            <AddCountry setChangeMade={setChangeMade} />
           } />
 
           {/* Add State Page */}
           <Route path='/addstate' element={
-            <AddState 
-              countriesList={countriesList} 
-            />
+            <AddState countriesList={countriesList} />
           } />
           
         </Routes>
