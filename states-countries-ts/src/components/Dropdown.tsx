@@ -4,7 +4,7 @@ import type { ListItem } from '../types/ListItem';
 interface DropdownProps {
     selected: ListItem;
     setSelected: (idValue: number) => void;
-    list: ListItem[];
+    list?: ListItem[];
 }
 
 function Dropdown({selected, setSelected, list}: DropdownProps) {
@@ -17,7 +17,7 @@ function Dropdown({selected, setSelected, list}: DropdownProps) {
             <option value={0} disabled>Select an Item...</option>
 
             {/* map through list */}
-            {list.map((item: ListItem) => {
+            {list?.map((item: ListItem) => {
                 return (
                     <option
                         value={item.id}

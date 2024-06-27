@@ -18,7 +18,7 @@ function Countries({
     countriesList
 }: CountriesProps) {
     // country data
-    const {data, isLoading, isError} = useGetAllCountriesQuery();
+    const {data} = useGetAllCountriesQuery();
 
     // function to find and select country
     function findAndSetSelectedCountry(countryId: number) {
@@ -34,7 +34,7 @@ function Countries({
             <Dropdown 
                 selected={selectedCountry}
                 setSelected={findAndSetSelectedCountry}
-                list={data}
+                list={data ?? []}
             />
         </div>
     )
