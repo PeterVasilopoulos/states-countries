@@ -1,5 +1,6 @@
 import Dropdown from "./Dropdown";
 import type { ListItem } from "../types/ListItem";
+import { useGetAllCountriesQuery } from "../app/service/apiData";
 
 import styles from '../styles/Countries.module.css';
 
@@ -16,6 +17,9 @@ function Countries({
     setSelectedState,
     countriesList
 }: CountriesProps) {
+    // country data
+    const {data, isLoading, isError} = useGetAllCountriesQuery();
+
     // function to find and select country
     function findAndSetSelectedCountry(countryId: number) {
         const country = countriesList.find(c => c.id === countryId);
@@ -30,7 +34,7 @@ function Countries({
             <Dropdown 
                 selected={selectedCountry}
                 setSelected={findAndSetSelectedCountry}
-                list={countriesList}
+                list={data}
             />
         </div>
     )

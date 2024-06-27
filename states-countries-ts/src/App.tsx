@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import type { ListItem } from './types/ListItem';
-import { RootState } from './app/store';
-import { useSelector, useDispatch } from 'react-redux';
-import { setToFalse } from './features/changeSlice';
 
 import './styles/index.css';
 import styles from './styles/App.module.css';
@@ -16,10 +13,6 @@ import Navbar from './components/Navbar';
 const GET_URL = "http://localhost:5257/api/Countries"
 
 function App() {
-  // changes made variable
-  const change = useSelector((state: RootState) => state.change.value);
-  const dispatch = useDispatch();
-
   // list of countries
   const [countriesList, setCountriesList] = useState([] as ListItem[]);
 
@@ -39,7 +32,6 @@ function App() {
     return await fetch(GET_URL)
       .then(response => response.json())
       .then(data => {
-        console.log(data)
         // place sorted list into state
         setCountriesList(data.sort((a: ListItem, b: ListItem) => 
             a.name.localeCompare(b.name)
@@ -61,7 +53,7 @@ function App() {
           {/* Home Page */}
           <Route path='/' element={
             <Home countriesList={countriesList} />
-            } />
+          } />
 
           {/* Add Country Page */}
           <Route path='/addcountry' element={
