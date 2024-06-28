@@ -3,12 +3,8 @@ import styles from '../styles/Form.module.css';
 import Button from "./Button";
 import { StatusOptions } from "../types/StatusOptions";
 import { useGetAllCountriesQuery } from "../app/service/countriesApi";
-
-interface StateFormData {
-    name: string;
-    code: string;
-    countryId: number;
-}
+import { ListItem } from "../types/ListItem";
+import { StateFormData } from "../types/StateFormData";
 
 // Post state url
 const POST_URL : string = "http://localhost:5257/api/States";
@@ -146,7 +142,7 @@ function StateForm() {
                 >
                     <option value={-1} disabled>Select a Country...</option>
 
-                    {countriesData?.map((country) => {
+                    {countriesData?.map((country: ListItem) => {
                         return (
                             <option 
                                 value={country.id}

@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import styles from '../styles/Form.module.css';
 import Button from './Button';
 import { StatusOptions } from '../types/StatusOptions';
-
-interface CountryFormData {
-    name: string;
-    code: string;
-}
+import { CountryFormData } from '../types/CountryFormData';
 
 // Post country url
 const POST_URL: string = "http://localhost:5257/api/Countries";
