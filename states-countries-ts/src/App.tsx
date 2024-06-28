@@ -52,7 +52,7 @@ function App() {
 
           {/* Home Page */}
           <Route path='/' element={
-            <Home countriesList={countriesList} />
+            <Home />
           } />
 
           {/* Add Country Page */}

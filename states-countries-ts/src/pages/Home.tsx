@@ -4,11 +4,7 @@ import States from '../components/States';
 import styles from '../styles/Home.module.css';
 import { ListItem } from '../types/ListItem';
 
-interface HomeProps {
-    countriesList: ListItem[];
-}
-
-function Home({countriesList}: HomeProps) {
+function Home() {
     // variable to hold the selected country
     const [selectedCountry, setSelectedCountry] = useState({id: 0, code: '', name: ''} as ListItem)
 
@@ -25,7 +21,6 @@ function Home({countriesList}: HomeProps) {
                     selectedCountry={selectedCountry}
                     setSelectedCountry={setSelectedCountry}
                     setSelectedState={setSelectedState}
-                    countriesList={countriesList}
                 />
                 <States
                     selectedState={selectedState}
