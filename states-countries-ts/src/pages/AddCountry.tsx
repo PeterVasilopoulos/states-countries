@@ -1,13 +1,7 @@
 import CountryForm from '../components/CountryForm';
 import styles from '../styles/Home.module.css';
 
-interface AddCountryProps {
-    setChangeMade: (value: boolean) => void;
-}
-
-function AddCountry({
-    setChangeMade
-}: AddCountryProps) {
+function AddCountry() {
     // variable to decide which item is added
 
     return (
@@ -17,9 +11,7 @@ function AddCountry({
 
             {/* Forms */}
             <div className={styles.content}>
-                <CountryForm
-                    setChangeMade={setChangeMade}
-                />
+                <CountryForm />
             </div>
         </div>
     )
