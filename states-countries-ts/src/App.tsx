@@ -62,9 +62,9 @@ function App() {
 
           {/* Add State Page */}
           <Route path='/addstate' element={
-            <AddState countriesList={countriesList} />
+            <AddState />
           } />
-          
+
         </Routes>
       </div>
     </div>

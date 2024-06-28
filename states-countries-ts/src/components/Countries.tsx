@@ -15,7 +15,7 @@ function Countries({
     setSelectedCountry,
     setSelectedState,
 }: CountriesProps) {
-    // country data
+    // get countries data
     const {data} = useGetAllCountriesQuery();
 
     // function to find and select country

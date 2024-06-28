@@ -1,12 +1,8 @@
 import React, { useState } from "react";
-import { ListItem } from "../types/ListItem";
 import styles from '../styles/Form.module.css';
 import Button from "./Button";
 import { StatusOptions } from "../types/StatusOptions";
-
-interface StateFormProps {
-    countriesList: ListItem[];
-}
+import { useGetAllCountriesQuery } from "../app/service/countriesApi";
 
 interface StateFormData {
     name: string;
@@ -17,9 +13,10 @@ interface StateFormData {
 // Post state url
 const POST_URL : string = "http://localhost:5257/api/States";
 
-function StateForm({
-    countriesList
-}: StateFormProps) {
+function StateForm() {
+    // get countries data
+    const {data: countriesData} = useGetAllCountriesQuery();
+
     // variable to hold form data
     const [formData, setFormData] = useState({name: '', code: '', countryId: -1} as StateFormData);
 
@@ -149,7 +146,7 @@ function StateForm({
                 >
                     <option value={-1} disabled>Select a Country...</option>
 
-                    {countriesList.map((country) => {
+                    {countriesData?.map((country) => {
                         return (
                             <option 
                                 value={country.id}
