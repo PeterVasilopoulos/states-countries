@@ -1,6 +1,6 @@
 export type ListItem = {
     id: number;
-    code: string;
     name: string;
+    code: string;
     countryID?: number;
 }

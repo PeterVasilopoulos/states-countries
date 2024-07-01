@@ -9,18 +9,32 @@ const countriesApi = apiData.injectEndpoints({
             query: () => "/Countries",
             providesTags: (result = []) =>
                 result
-                    ? [...result.map(({id}) => ({type: "Countries" as const, id})), "Countries"]
-                    : ["Countries"]
+                    ? [...result.map(({id}) => ({type: "Country" as const, id})), "Country"]
+                    : ["Country"]
         }),
         // Add new country
-        addNewCountry: builder.mutation<ListItem, CountryFormData>({
+        addCountry: builder.mutation<ListItem, CountryFormData>({
             query: (newCountry) => ({
                 url: "/Countries",
                 method: "POST",
                 body: newCountry,
-            })
+            }),
+            invalidatesTags: ["Country"]
+        }),
+        // Edit a country
+        editCountry: builder.mutation<ListItem, ListItem>({
+            query: (editedCountry) => ({
+                url: `/Countries/${editedCountry.id}`,
+                method: "PUT",
+                body: editedCountry,
+            }),
+            invalidatesTags: (_result, _error, arg) => [{type: "Country", id: arg.id}]
         })
     })
 })
 
-export const { useGetAllCountriesQuery } = countriesApi;
+export const {
+    useGetAllCountriesQuery, 
+    useAddCountryMutation,
+    useEditCountryMutation,
+} = countriesApi;

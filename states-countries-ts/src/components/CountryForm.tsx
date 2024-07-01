@@ -3,64 +3,54 @@ import styles from '../styles/Form.module.css';
 import Button from './Button';
 import { StatusOptions } from '../types/StatusOptions';
 import { CountryFormData } from '../types/CountryFormData';
-
-// Post country url
-const POST_URL: string = "http://localhost:5257/api/Countries";
+import { useAddCountryMutation } from '../app/service/countriesApi';
 
 function CountryForm() {
+    // status variable
+    const [status, setStatus] = useState('none' as StatusOptions);
+    
     // variable to hold the form data
     const [formData, setFormData] = useState({name: '', code: ''} as CountryFormData);
 
-    // status variable
-    const [status, setStatus] = useState('none' as StatusOptions);
-
     // destructure formData to use in value attribute of inputs
     const {name, code} = formData;
+
+    // function for adding country
+    const [addCountry] = useAddCountryMutation();
 
     // handle change input data
     function handleChangeInput(e: React.ChangeEvent<HTMLInputElement>) {
         setFormData({...formData, [e.target.name]: e.target.value});
     }
 
-    // handle submit form
+
+    // handle submit form with RTK Query
     function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
-        // prevent page from reloading
         e.preventDefault();
 
-        // post function
-        async function postFormData(url: string, data: CountryFormData) {
-            // check if name or code are empty
-            if(!data.name || !data.code) {
-                setStatus('missing')
-                return
-            } else {
-                setStatus('none')
-            }
+        // reset status
+        setStatus('none');
 
-            const response = await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            })
-            
-            // check for 409 error
-            if(response.status === 409) {
-                setStatus('codeInUse');
-                return;
-            }
-
-            // set status to submitted
-            setStatus('submitted');
-            
-            return response.json();
+        // check if data is missing
+        if(!formData.name || !formData.code) {
+            setStatus('missing');
+            return
+        } else {
+            setStatus('none');
         }
 
-        // call post function
-        postFormData(POST_URL, formData);
+        // add new country
+        addCountry(formData)
+            .unwrap()
+            .catch(() => {
+                setStatus('codeInUse');
+                return
+            });
 
-        // reset formData
+        // set status to submitted
+        setStatus('submitted');
+
+        // reset form data
         setFormData({name: '', code: ''});
     }
 

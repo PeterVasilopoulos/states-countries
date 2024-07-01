@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react"
 import type { ListItem } from "../types/ListItem";
+import { useGetStatesFromCountryCodeQuery } from "../app/service/statesApi";
 import Dropdown from "./Dropdown";
-import styles from '../styles/States.module.css'
+import styles from '../styles/States.module.css';
 
 interface StatesProps {
     selectedState: ListItem;
@@ -9,52 +9,21 @@ interface StatesProps {
     selectedCountry: ListItem;
 }
 
-// GET States URL
-const GET_URL : string = "http://localhost:5257/api/States/Country/";
-
 function States({
     selectedState, 
     setSelectedState, 
     selectedCountry,
 }: StatesProps) {
-    // variable to hold list of states
-    const [statesList, setStatesList] = useState([] as ListItem[])
+    // get states data
+    const {data} = useGetStatesFromCountryCodeQuery(selectedCountry?.code);
+    console.log("STATES DATA");
+    console.log(data);
 
     // function to find and select state
     function findAndSetSelectedState(stateId: number) {
-        const state = statesList.find(s => s.id === stateId)
+        const state = data?.find(s => s.id === stateId)
         setSelectedState(state as ListItem)
     }
-
-    // hook to pull state data from api
-    useEffect(() => {
-        // variable to check if component is mounted
-        let isMounted: boolean = true
-
-        // function to fetch state data
-        async function fetchData() {
-        await fetch(`${GET_URL}${selectedCountry.code}`)
-            .then(response => response.json())
-            .then(data => {
-                if(isMounted) {
-                    // place sorted list into state
-                    setStatesList(data.sort((a: ListItem, b: ListItem) => 
-                        a.name.localeCompare(b.name)
-                    ))
-                }
-            })
-        }
-
-        // run function if a country is selected
-        if(selectedCountry.id) {
-            fetchData()
-        }
-
-        // cleanup
-        return () => {
-            isMounted = false
-        }
-    }, [selectedCountry])
 
     return (
         <div className={styles.main}>
@@ -64,7 +33,7 @@ function States({
                     <Dropdown 
                         selected={selectedState}
                         setSelected={findAndSetSelectedState}
-                        list={statesList}
+                        list={data}
                     />
                 </>
             :
