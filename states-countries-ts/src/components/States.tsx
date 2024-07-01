@@ -16,8 +16,6 @@ function States({
 }: StatesProps) {
     // get states data
     const {data} = useGetStatesFromCountryCodeQuery(selectedCountry?.code);
-    console.log("STATES DATA");
-    console.log(data);
 
     // function to find and select state
     function findAndSetSelectedState(stateId: number) {
@@ -27,18 +25,12 @@ function States({
 
     return (
         <div className={styles.main}>
-            {selectedCountry.id ?
-                <>
-                    <p className={styles.label}>State Selected: {selectedState.name}</p>
-                    <Dropdown 
-                        selected={selectedState}
-                        setSelected={findAndSetSelectedState}
-                        list={data}
-                    />
-                </>
-            :
-                <></>
-            }   
+            <p className={styles.label}>State Selected: {selectedState.name}</p>
+            <Dropdown 
+                selected={selectedState}
+                setSelected={findAndSetSelectedState}
+                list={data}
+            />
         </div>
     )
 }

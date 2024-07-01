@@ -22,11 +22,14 @@ function Home() {
                     setSelectedCountry={setSelectedCountry}
                     setSelectedState={setSelectedState}
                 />
-                <States
-                    selectedState={selectedState}
-                    setSelectedState={setSelectedState}
-                    selectedCountry={selectedCountry}
-                />
+                {selectedCountry.id
+                    ? <States
+                        selectedState={selectedState}
+                        setSelectedState={setSelectedState}
+                        selectedCountry={selectedCountry}
+                    />
+                    : <></>
+                }
             </div>
         </div>
     )
