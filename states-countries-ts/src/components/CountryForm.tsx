@@ -6,17 +6,16 @@ import { CountryFormData } from '../types/CountryFormData';
 import { useAddCountryMutation } from '../app/service/countriesApi';
 
 function CountryForm() {
+    // function for adding country
+    const [addCountry] = useAddCountryMutation();
+
     // status variable
     const [status, setStatus] = useState('none' as StatusOptions);
     
     // variable to hold the form data
     const [formData, setFormData] = useState({name: '', code: ''} as CountryFormData);
-
     // destructure formData to use in value attribute of inputs
     const {name, code} = formData;
-
-    // function for adding country
-    const [addCountry] = useAddCountryMutation();
 
     // handle change input data
     function handleChangeInput(e: React.ChangeEvent<HTMLInputElement>) {
@@ -34,7 +33,7 @@ function CountryForm() {
         // check if data is missing
         if(!formData.name || !formData.code) {
             setStatus('missing');
-            return
+            return;
         } else {
             setStatus('none');
         }
@@ -44,7 +43,7 @@ function CountryForm() {
             .unwrap()
             .catch(() => {
                 setStatus('codeInUse');
-                return
+                return;
             });
 
         // set status to submitted

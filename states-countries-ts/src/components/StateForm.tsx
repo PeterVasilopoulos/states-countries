@@ -5,20 +5,19 @@ import { StatusOptions } from "../types/StatusOptions";
 import { useGetAllCountriesQuery } from "../app/service/countriesApi";
 import { ListItem } from "../types/ListItem";
 import { StateFormData } from "../types/StateFormData";
-
-// Post state url
-const POST_URL : string = "http://localhost:5257/api/States";
+import { useAddStateMutation } from "../app/service/statesApi";
 
 function StateForm() {
     // get countries data
     const {data: countriesData} = useGetAllCountriesQuery();
-
-    // variable to hold form data
-    const [formData, setFormData] = useState({name: '', code: '', countryId: -1} as StateFormData);
+    // function for adding state
+    const [addState] = useAddStateMutation();
 
     // status variable
     const [status, setStatus] = useState('none' as StatusOptions);
 
+    // variable to hold form data
+    const [formData, setFormData] = useState({name: '', code: '', countryId: -1} as StateFormData);
     // destructure formData to use in value attribute of inputs
     const {name, code, countryId} = formData;
 
@@ -32,45 +31,34 @@ function StateForm() {
         setFormData({...formData, [e.target.name]: e.target.value})
     }
 
-    // handle submit form function
+
+    // handle submit form with rtk query
     function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
-        // prevent page from reloading
         e.preventDefault();
 
-        // post function
-        async function postFormData(url: string, data: StateFormData) {
-            // check if name or code is empty
-            if(!data.name || !data.code || data.countryId === -1) {
-                setStatus('missing')
-                return
-            } else {
-                setStatus('none')
-            }
-            
-            const response = await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            })
+        // reset status
+        setStatus('none');
 
-            // check for 409 error
-            if(response.status === 409) {
-                setStatus('codeInUse');
-                return;
-            }
-
-            // set status to submitted
-            setStatus('submitted')
-
-            return response.json();
+        // check if data is missing
+        if(!formData.name || !formData.code || formData.countryId === -1) {
+            setStatus('missing');
+            return
+        } else {
+            setStatus('none');
         }
 
-        // call post function
-        postFormData(POST_URL, formData);
+        // add new state
+        addState(formData)
+            .unwrap()
+            .catch(() => {
+                setStatus('codeInUse');
+                return;
+        });
+        
+        // set status to submitted
+        setStatus('submitted');
 
-        // reset formData
+        // reset form data
         setFormData({name: '', code: '', countryId: -1})
     }
 
