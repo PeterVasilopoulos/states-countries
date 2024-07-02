@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import styles from '../styles/Form.module.css';
-import Button from "./Button";
 import { StatusOptions } from "../types/StatusOptions";
 import { useGetAllCountriesQuery } from "../app/service/countriesApi";
 import { ListItem } from "../types/ListItem";
 import { StateFormData } from "../types/StateFormData";
 import { useAddStateMutation } from "../app/service/statesApi";
+import styles from '../styles/Form.module.css';
+import Button from "./Button";
 
 function StateForm() {
     // get countries data
