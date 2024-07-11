@@ -91,7 +91,6 @@ function StateForm() {
             }
 
 
-
             {/* State Name */}
             <div className={styles.inputBlock}>
                 <label htmlFor="name">State Name:</label>
