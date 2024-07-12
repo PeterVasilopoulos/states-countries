@@ -4,7 +4,7 @@ WORKDIR /app
 COPY StatesCountriesApi.csproj .
 RUN dotnet restore "StatesCountriesApi.csproj"
 COPY . .
-RUN dotnet public "StatesCountriesApi.csproj" -c Release -o /publish
+RUN dotnet publish "StatesCountriesApi.csproj" -c Release -o /publish
 
 # Serve 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 as final
