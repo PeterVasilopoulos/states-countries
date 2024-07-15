@@ -1,0 +1,9 @@
+services:
+  frontend:
+    build: ./states-countries-ts
+    ports: 
+      - 5173:5173
+  api:
+    build: ./states-countries-api
+    ports:
+      - 5257:5257
