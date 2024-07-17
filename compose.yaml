@@ -3,7 +3,15 @@ services:
     build: ./states-countries-ts
     ports: 
       - 5173:5173
+    volumes:
+      - sc_frontend:/var/lib/docker/volume
   api:
     build: ./states-countries-api
     ports:
       - 5257:5257
+    volumes:
+    - sc_api:/var/lib/docker/volume
+
+volumes:
+  sc_frontend:
+  sc_api:
