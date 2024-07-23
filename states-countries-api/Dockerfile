@@ -4,7 +4,7 @@ WORKDIR /app
 COPY StatesCountriesApi.csproj .
 RUN dotnet restore "StatesCountriesApi.csproj"
 COPY . .
-CMD ["dotnet", "run", "--urls", "http://0.0.0.0:5257"]
+CMD ["dotnet", "watch", "run", "--urls", "http://0.0.0.0:5257"]
 # RUN dotnet publish "StatesCountriesApi.csproj" -c Release -o /publish
 
 # # Serve 
