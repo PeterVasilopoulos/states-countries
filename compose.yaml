@@ -11,3 +11,11 @@ services:
       - 5257:5257
     volumes:
     - ./states-countries-api:/app
+  sql-server-db:
+    container_name: states-countries-db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - 1433:1433
+    environment: 
+      SA_PASSWORD: "This_is_very_secure"
+      ACCEPT_EULA: "Y"
