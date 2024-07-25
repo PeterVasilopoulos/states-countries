@@ -10,10 +10,12 @@ services:
     ports:
       - 5257:5257
     volumes:
-    - ./states-countries-api:/app
+      - ./states-countries-api:/app
     depends_on:
-      - sql-server-db
-  sql-server-db:
+      - db
+    environment:
+      DOTNET_ENVIRONMENT: Development
+  db:
     container_name: states-countries-db
     image: mcr.microsoft.com/mssql/server:2022-latest
     ports:
@@ -21,3 +23,8 @@ services:
     environment: 
       SA_PASSWORD: "This_is_very_secure"
       ACCEPT_EULA: "Y"
+    volumes:
+      - sql_data:/var/opt/mssql
+
+volumes:
+  sql_data:
