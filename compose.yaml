@@ -11,6 +11,8 @@ services:
       - 5257:5257
     volumes:
     - ./states-countries-api:/app
+    depends_on:
+      - sql-server-db
   sql-server-db:
     container_name: states-countries-db
     image: mcr.microsoft.com/mssql/server:2022-latest

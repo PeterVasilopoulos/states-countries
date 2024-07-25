@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace StatesCountriesApi.Models;
 
@@ -6,7 +8,21 @@ public class ApiContext : DbContext
 {
     public ApiContext(DbContextOptions<ApiContext> options) : base(options)
     {
+        var dbCreator = Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator;
+        if(dbCreator != null)
+        {
+            // Create Database
+            if(!dbCreator.CanConnect())
+            {
+                dbCreator.Create();
+            }
 
+            // Create Tables
+            if(!dbCreator.HasTables())
+            {
+                dbCreator.CreateTables();
+            }
+        }
     }
 
     public DbSet<Country> Countries { get; set; } = null!;
