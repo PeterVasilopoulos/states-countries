@@ -6,11 +6,11 @@ RUN dotnet restore "StatesCountriesApi.csproj"
 COPY . .
 CMD ["dotnet", "watch", "run", "--urls", "http://0.0.0.0:5257"]
 
-FROM base as build
+FROM base AS build
 RUN dotnet publish "StatesCountriesApi.csproj" -c Release -o /publish
 
 # Serve 
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 as final
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 COPY --from=build /publish .
 

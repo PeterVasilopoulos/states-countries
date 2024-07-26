@@ -1,12 +1,16 @@
 services:
   frontend:
-    build: ./states-countries-ts
+    build: 
+      context: ./states-countries-ts
+      target: base
     ports: 
       - 5173:5173
     volumes:
       - ./states-countries-ts:/app
   api:
-    build: ./states-countries-api
+    build: 
+      context: ./states-countries-api
+      target: base
     ports:
       - 5257:5257
     volumes:
